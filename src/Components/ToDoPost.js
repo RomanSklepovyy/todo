@@ -1,13 +1,16 @@
 import React from "react";
 
-const ToDoPost = (props) => {
-    console.log(props);
+const ToDoPost = ({list, handleDeleteElement}) => {
+
     return (
-        props.list.map((el) => {
+        list.map((el, index) => {
             return (
-                <div className='todo_post' key={el.id}>
+                <div className='todo_post' key={index}>
                     {el.text}
-                    <button onClick={() => props.handleDeleteElement(el.id)}> Delete </button>
+                    <button onClick={() => {
+                        el.id = index;
+                        handleDeleteElement(el.id)
+                    }}> Delete </button>
                 </div>
             )
         }))

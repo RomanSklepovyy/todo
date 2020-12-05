@@ -7,10 +7,9 @@ class ToDoList extends React.Component {
 
         this.inputHandler = this.inputHandler.bind(this);
         this.addPost = this.addPost.bind(this);
-        this.handleDeleteElement = this.handleDeleteElement(this);
+        this.handleDeleteElement = this.handleDeleteElement.bind(this);
 
         this.state = {
-            counter: 0,
             value: '',
             list: []
         }
@@ -36,19 +35,16 @@ class ToDoList extends React.Component {
     }
 
     addPost() {
-        let {counter} = this.state;
         const posts = this.state.list;
-        posts.push({text : this.state.value, id: counter++});
+        posts.push({text : this.state.value});
 
-        this.setState({value: '', list: posts, counter: counter++});
+        this.setState({value: '', list: posts});
 
         console.log(this.state);
     }
 
     handleDeleteElement(id) {
-        this.setState(state => ({
-            elements: state.list.filter(el => el.id !== id)
-        }));
+        this.setState({list: this.state.list.filter(el => el.id !== id)});
     }
 }
 
